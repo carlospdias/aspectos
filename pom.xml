@@ -82,5 +82,6 @@
   <modules>
     <module>001-clientws-simples</module>
     <module>002-clientws-proxy</module>
+    <module>003-clientws-dynamic-proxy</module>
   </modules>
 </project>
