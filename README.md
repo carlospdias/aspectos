@@ -8,7 +8,7 @@ $ mvn archetype:generate -DgroupId=br.jus.tse.csadm -DartifactId=aop -Dpackage=b
 
 ## Projetos
 ```sh
-$ mvn archetype:generate -DgroupId=br.jus.tse.csadm -DartifactId=001-simples-clientws -Dpackage=br.jus.tse.csadm -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
+$ mvn archetype:generate -DgroupId=br.jus.tse.csadm -DartifactId=001-clientws-simples -Dpackage=br.jus.tse.csadm -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
 
 $ mvn archetype:generate -DgroupId=br.jus.tse.csadm -DartifactId=002-clientws-proxy -Dpackage=br.jus.tse.csadm -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
 
