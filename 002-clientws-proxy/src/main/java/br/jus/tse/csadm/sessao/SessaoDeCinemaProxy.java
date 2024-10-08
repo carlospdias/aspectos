@@ -12,7 +12,7 @@ import java.time.temporal.ChronoUnit;
 
 public class SessaoDeCinemaProxy implements Sessao {
     public static final int MAX_CACHE_IN_HOURS = 3;
-    private String FILE_NAME_CACHE=System.getProperty("user.home") + "/cache-movies.json";
+    private static final String FILE_NAME_CACHE=System.getProperty("user.home") + "/cache-movies.json";
 
     private boolean isvalidCache(){
         Path path = Paths.get(FILE_NAME_CACHE);
