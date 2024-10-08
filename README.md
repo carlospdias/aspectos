@@ -6,6 +6,13 @@
 $ mvn archetype:generate -DgroupId=br.jus.tse.csadm -DartifactId=aop -Dpackage=br.jus.tse.csadm -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
 ```
 
+## Serviço Web de Apoio
+
+```sh
+https://api-content.ingresso.com/v0/sessions/city/113/theater/381/partnership/home/groupBy/sessionType?date=2024-10-08
+
+```
+
 ## Projetos
 ```sh
 $ mvn archetype:generate -DgroupId=br.jus.tse.csadm -DartifactId=001-clientws-simples -Dpackage=br.jus.tse.csadm -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
