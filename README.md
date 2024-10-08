@@ -8,9 +8,15 @@ $ mvn archetype:generate -DgroupId=br.jus.tse.csadm -DartifactId=aop -Dpackage=b
 
 ## Projetos
 ```sh
-$ mvn archetype:generate -DgroupId=br.jus.tse.csadm -DartifactId=proxy-jdk -Dpackage=br.jus.tse.csadm -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
+$ mvn archetype:generate -DgroupId=br.jus.tse.csadm -DartifactId=001-simples-clientws -Dpackage=br.jus.tse.csadm -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
 
-$ mvn archetype:generate -DgroupId=br.jus.tse.csadm -DartifactId=proxy-cglib -Dpackage=br.jus.tse.csadm -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
+$ mvn archetype:generate -DgroupId=br.jus.tse.csadm -DartifactId=002-clientws-proxy -Dpackage=br.jus.tse.csadm -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
+
+$ mvn archetype:generate -DgroupId=br.jus.tse.csadm -DartifactId=003-clientws-proxy-jdk -Dpackage=br.jus.tse.csadm -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
+
+$ mvn archetype:generate -DgroupId=br.jus.tse.csadm -DartifactId=003-clientws-proxy-cglib -Dpackage=br.jus.tse.csadm -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
+
+
 
 
 ```
