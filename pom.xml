@@ -83,5 +83,6 @@
     <module>001-clientws-simples</module>
     <module>002-clientws-proxy</module>
     <module>003-clientws-dynamic-proxy</module>
+    <module>004-clientws-proxy-cglib</module>
   </modules>
 </project>

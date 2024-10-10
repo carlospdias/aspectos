@@ -21,7 +21,7 @@ $ mvn archetype:generate -DgroupId=br.jus.tse.csadm -DartifactId=002-clientws-pr
 
 $ mvn archetype:generate -DgroupId=br.jus.tse.csadm -DartifactId=003-clientws-dynamic-proxy -Dpackage=br.jus.tse.csadm -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
 
-$ mvn archetype:generate -DgroupId=br.jus.tse.csadm -DartifactId=003-clientws-proxy-cglib -Dpackage=br.jus.tse.csadm -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
+$ mvn archetype:generate -DgroupId=br.jus.tse.csadm -DartifactId=004-clientws-proxy-cglib -Dpackage=br.jus.tse.csadm -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
 
 
 
