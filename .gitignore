@@ -13,6 +13,7 @@
 *.rar
 hs_err_pid*
 replay_pid*
+.mvn
 
 ### Eclipse ###
 .metadata
