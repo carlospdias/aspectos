@@ -16,43 +16,50 @@
       </div>
     </nav>
     <main class="container py-4 px-3 mx-auto">
-      <div class="card">
+      <div class="card" id="card">
         <div class="card-header"> Avisos</div>
         <div class="card-body">
           <h5 class="card-title">Mensagem Recebida </h5>
           <p class="card-text" id="msg-text">${name}</p>
-          <p>${server.contextPath}</p>
+          <div class="card-body" id="card-body"></div>
         </div>
       </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
-      var xhr = function(url) {
-        return new Promise(function(resolve, reject) {
-          try {
-            var xmhr = new XMLHttpRequest();
-            //Listen for API Response
-            xmhr.onreadystatechange = function() {
-              if (xmhr.readyState == XMLHttpRequest.DONE && xmhr.status == 200) {
-                return resolve(xmhr.responseText);
-              }
-            };
-            xmhr.open("GET", url, true);
-            xmhr.send();
-          } catch (ex) {
-            reject("Exception: Oh CORS's you've made a mistake!");
-          }
-        });
-      };
+      document.onreadystatechange = function () {
+        if (document.readyState == "complete") {
+          const endPointUrl = "http://localhost:8085/subscribe"
+          const eventSource = new EventSource(endPointUrl);
+          eventSource.addEventListener("ultima_cotacao", (event)=>{
+          let json =  JSON.parse(event.data);
 
+          document.getElementById("msg-text").textContent = json['titulo'];
 
-      var sse = new EventSource('http://localhost:8522/api-sse');
-      sse.onmessage = function (evt) {
-        var el = document.getElementById('msg-text');
-        el.appendChild(document.createTextNode(evt.data));
-        el.appendChild(document.createElement('br'))
-      };
+          let el_body = document.getElementById("card-body");
+          console.log(el_body);
+          let img = document.createElement('img');
+          img.src = json["image"];
+          img.width="300";
+          img.heigh="300";
+          el_body.appendChild(img);
+          el_body.appendChild(document.createElement('br'))
+          let link = document.createElement("a");
+          link.href=json["link"];
+          link.target="_blank";
 
+          link.textContent="Link de Compra"
+          el_body.appendChild(link);
+          el_body.appendChild(document.createElement('br'));
+          el_body.appendChild(document.createTextNode("Preço Normal: " + json["precoNomal"]));
+          el_body.appendChild(document.createElement('br'));
+          el_body.appendChild(document.createTextNode("Desconto: " + json["desconto"]));
+          el_body.appendChild(document.createElement('br'));
+          el_body.appendChild(document.createTextNode("Preço de Venda: " + json["precoComDesconto"]));
+          el_body.appendChild(document.createElement('br'));
+          });
+        }
+      }
     </script>
   </body>
 </html>
