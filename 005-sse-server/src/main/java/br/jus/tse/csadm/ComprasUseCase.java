@@ -17,8 +17,7 @@ public class ComprasUseCase {
     }
     private void writeToFile(List<ProductResponse>produtos){
         String file = System.getProperty("user.home") + "\\h2db\\produtos.html";
-        System.out.println(file);
-        System.out.println("********************************************");
+
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(file, false), 1024)) {
            for(ProductResponse produto : produtos){
                bw.write(produto.responseAsHtmCard());
