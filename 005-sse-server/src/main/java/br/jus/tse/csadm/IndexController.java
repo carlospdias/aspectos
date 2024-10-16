@@ -1,13 +1,9 @@
 package br.jus.tse.csadm;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -18,11 +14,15 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Controller
 public class IndexController {
     private final List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
+    private ComprasUseCase comprasUseCase;
+
+    public IndexController(ComprasUseCase comprasUseCase) {
+        this.comprasUseCase = comprasUseCase;
+    }
 
     @GetMapping
     public ModelAndView index(){
         ModelAndView mv = new ModelAndView("index");
-        mv.addObject("name", "Meu Nome");
         return mv;
     }
     @CrossOrigin
@@ -40,25 +40,27 @@ public class IndexController {
         return sseEmitter;
 
     }
+    private String prepareResponse(List<ProductResponse>respostas){
+        StringBuilder stb = new StringBuilder();
+        respostas.forEach((resp)->{
+            stb.append(resp.responseAsHtmCard());
+        });
+        return stb.toString();
+    }
+    @PostMapping(value="dispachEvent",consumes = "application/json")
+    public ResponseEntity<?> dispatchEvent(@RequestBody SupplierRequest supplierRequest) {
 
-    @PostMapping(value="dispachEvent", consumes = "application/json")
-    public ResponseEntity<?> dispatchEvent(@RequestBody MensagemRequest mensagemRequest) {
-        ObjectMapper Obj = new ObjectMapper();
-        String jsonStr = null;
-        try {
-            jsonStr = Obj.writeValueAsString(mensagemRequest);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        String response = prepareResponse(comprasUseCase.gravarNoBancoDeDados(supplierRequest.getUrl()));
 
         for (SseEmitter emitter : emitters) {
             try {
-                emitter.send(SseEmitter.event().name("ultima_cotacao").data(jsonStr));
+                emitter.send(SseEmitter.event().name("ultima_cotacao").data(response));
             } catch (IOException e) {
                 emitters.remove(emitter);
                 throw new RuntimeException(e);
             }
         }
+
         return ResponseEntity.ok().header("fila","alimentada").body("mensagem recebida");
     }
 
