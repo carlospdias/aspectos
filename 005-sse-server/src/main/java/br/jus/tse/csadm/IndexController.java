@@ -1,7 +1,6 @@
 package br.jus.tse.csadm;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +14,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Controller
 public class IndexController {
     private final List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
+    private ComprasUseCase comprasUseCase;
+
+    public IndexController(ComprasUseCase comprasUseCase) {
+        this.comprasUseCase = comprasUseCase;
+    }
 
     @GetMapping
     public ModelAndView index(){
@@ -45,7 +49,7 @@ public class IndexController {
     }
     @PostMapping(value="dispachEvent",consumes = "application/json")
     public ResponseEntity<?> dispatchEvent(@RequestBody SupplierRequest supplierRequest) {
-        ComprasUseCase comprasUseCase = new ComprasUseCase();
+
         String response = prepareResponse(comprasUseCase.gravarNoBancoDeDados(supplierRequest.getUrl()));
 
         for (SseEmitter emitter : emitters) {
